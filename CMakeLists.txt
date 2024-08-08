@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(vlang LANGUAGES C)
+project(plang LANGUAGES C)
 
 add_executable(
-  vlang
+  plang
   main.c
   common.h
   chunk.h
@@ -23,6 +23,6 @@ add_executable(
 
 include(GNUInstallDirs)
 install(
-  TARGETS vlang
+  TARGETS plang
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
   RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
