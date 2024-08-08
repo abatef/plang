@@ -15,6 +15,7 @@ static Obj *allocateObj(size_t size, ObjType type)
     obj->type = type;
     obj->next = vm.objects;
     vm.objects = obj;
+    return obj;
 }
 
 #define ALLOCATE_OBJ(type, objType) (type *) allocateObj(sizeof(type), objType)
