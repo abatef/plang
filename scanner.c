@@ -205,6 +205,9 @@ Token scanToken()
     scanner.start = scanner.current;
     if (isAtEnd()) return makeToken(TOKEN_EOF);
     char c = advance();
+    if (isalpha(c)) {
+        return identifier();
+    }
     if (isdigit(c)) {
         return number();
     }
@@ -240,6 +243,8 @@ Token scanToken()
             return makeToken(match('=') ? TOKEN_LESS_EQUAL : TOKEN_LESS);
         case '>' :
             return makeToken(match('=') ? TOKEN_GREATER_EQUAL : TOKEN_GREATER);
+        case '"' :
+            return string();
     }
 
     return errorToken("unexpected character.");

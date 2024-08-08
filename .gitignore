@@ -1,0 +1,8 @@
+.cache
+build
+CMakeFiles
+cmake*
+CMakeCache.txt
+*.user
+Makefile
+vlang

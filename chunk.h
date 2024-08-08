@@ -4,7 +4,23 @@
 #include "common.h"
 #include "value.h"
 
-typedef enum { OP_RET, OP_CONST, OP_CONST_LONG, OP_NEG, OP_ADD, OP_SUB, OP_MUL, OP_DIV } Opcode;
+typedef enum {
+    OP_RET,
+    OP_CONST,
+    OP_CONST_LONG,
+    OP_NEG,
+    OP_ADD,
+    OP_SUB,
+    OP_MUL,
+    OP_DIV,
+    OP_FALSE,
+    OP_TRUE,
+    OP_NIL,
+    OP_NOT,
+    OP_EQUAL,
+    OP_GREATER,
+    OP_LESS
+} Opcode;
 
 typedef struct {
     int offset;

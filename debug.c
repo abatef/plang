@@ -1,4 +1,5 @@
 #include "debug.h"
+#include "chunk.h"
 #include <stdio.h>
 
 static int testInst(int offset, const char *mnemonic)
@@ -55,22 +56,36 @@ int disassembleInstr(Chunk *chunk, int offset)
 
     switch (inst) {
         case OP_RET :
-            return testInst(offset, "RETURN");
+            return testInst(offset, "OP_RET");
             break;
         case OP_CONST :
-            return constantInstruction("CONST", chunk, offset);
+            return constantInstruction("OP_CNST", chunk, offset);
         case OP_CONST_LONG :
-            return longConstantInstruction("CONST_LONG", chunk, offset);
+            return longConstantInstruction("OP_LCNST", chunk, offset);
         case OP_NEG :
-            return simpleInstruction("NEGATE", offset);
+            return simpleInstruction("OP_NEG", offset);
         case OP_ADD :
-            return simpleInstruction("ADD", offset);
+            return simpleInstruction("OP_ADD", offset);
         case OP_SUB :
-            return simpleInstruction("SUBTRACT", offset);
+            return simpleInstruction("OP_SUB", offset);
         case OP_MUL :
-            return simpleInstruction("MULTIPLY", offset);
+            return simpleInstruction("OP_MUL", offset);
         case OP_DIV :
-            return simpleInstruction("DIVIDE", offset);
+            return simpleInstruction("OP_DIV", offset);
+        case OP_NIL :
+            return simpleInstruction("OP_NIL", offset);
+        case OP_FALSE :
+            return simpleInstruction("OP_FLSE", offset);
+        case OP_TRUE :
+            return simpleInstruction("OP_TRUE", offset);
+        case OP_NOT :
+            return simpleInstruction("OP_NOT", offset);
+        case OP_EQUAL :
+            return simpleInstruction("OP_EQUL", offset);
+        case OP_GREATER :
+            return simpleInstruction("OP_GRTR", offset);
+        case OP_LESS :
+            return simpleInstruction("OP_LESS", offset);
         default :
             printf("[+] unknown instruction\n");
             return offset + 1;
