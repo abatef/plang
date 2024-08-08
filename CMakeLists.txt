@@ -19,7 +19,7 @@ add_executable(
   compiler.h
   compiler.c
   scanner.h
-  scanner.c object.c object.h)
+  scanner.c object.c object.h table.h table.c)
 
 include(GNUInstallDirs)
 install(

@@ -3,6 +3,7 @@
 #include "debug.h"
 #include "memory.h"
 #include "object.h"
+#include "table.h"
 #include "value.h"
 #include "vm.h"
 #include "compiler.h"
@@ -152,6 +153,7 @@ void initVM()
     vm.stack = NULL;
     vm.stackCapacity = 0;
     vm.objects = NULL;
+    initTable(&vm.strings);
     resetStack();
 }
 
@@ -174,7 +176,11 @@ InterpretResult interpret(const char *source)
     return result;
 }
 
-void freeVM() {}
+void freeVM()
+{
+    freeObjects();
+    freeTable(&vm.strings);
+}
 
 void push(Value value)
 {

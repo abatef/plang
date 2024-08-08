@@ -2,6 +2,7 @@
 #define VM_H
 
 #include "chunk.h"
+#include "table.h"
 #include "value.h"
 #include "object.h"
 
@@ -14,6 +15,7 @@ typedef struct {
     int stackCapacity;
     int stackCount;
     Obj *objects;
+    Table strings;
 } VM;
 
 extern VM vm;
