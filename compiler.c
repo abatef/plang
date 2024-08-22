@@ -254,7 +254,10 @@ static void literal()
     }
 }
 
-static void string() {}
+static void string()
+{
+    emitConstant(OBJ_VAL(copyString(parser.previous.start + 1, parser.previous.length - 2)));
+}
 
 ParseRule rules[] = {
     [TOKEN_LEFT_PAREN] = {grouping, NULL, PREC_NONE},

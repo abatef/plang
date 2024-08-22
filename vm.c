@@ -198,7 +198,7 @@ Value pop()
 
 Value peek(int dist)
 {
-    return vm.stack[vm.stackCount + dist];
+    return vm.stack[vm.stackCount - dist - 1];
 }
 
 void runtimeError(const char *format, ...)
