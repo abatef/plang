@@ -16,6 +16,7 @@ typedef struct {
     int stackCount;
     Obj *objects;
     Table strings;
+    Table globals;
 } VM;
 
 extern VM vm;

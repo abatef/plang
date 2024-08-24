@@ -21,9 +21,8 @@ static int constantInstruction(const char *name, Chunk *chunk, int offset) {
 }
 
 static int longConstantInstruction(const char *name, Chunk *chunk, int offset) {
-    uint32_t constant = chunk->code[offset + 1] |
-                        (chunk->code[offset + 2] << 8) |
-                        (chunk->code[offset + 3] << 16);
+    uint32_t constant =
+        chunk->code[offset + 1] | (chunk->code[offset + 2] << 8) | (chunk->code[offset + 3] << 16);
     printf("%-10s %4d '", name, constant);
     printValue(chunk->constants.values[constant]);
     printf("'\n");
@@ -81,6 +80,16 @@ int disassembleInstr(Chunk *chunk, int offset) {
         return simpleInstruction("OP_GRTR", offset);
     case OP_LESS:
         return simpleInstruction("OP_LESS", offset);
+    case OP_PRINT:
+        return simpleInstruction("OP_PRNT", offset);
+    case OP_POP:
+        return simpleInstruction("OP_POP", offset);
+    case OP_DEFINE_GLOBAL:
+        return constantInstruction("OP_DEFINE_GLOBAL", chunk, offset);
+    case OP_GET_GLOBAL:
+        return constantInstruction("OP_GET_GLOBAL", chunk, offset);
+    case OP_SET_GLOBAL:
+        return constantInstruction("OP_SET_GLOBAL", chunk, offset);
     default:
         printf("[+] unknown instruction\n");
         return offset + 1;
