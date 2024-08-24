@@ -2,9 +2,9 @@
 #define VM_H
 
 #include "chunk.h"
+#include "object.h"
 #include "table.h"
 #include "value.h"
-#include "object.h"
 
 #define STACK_MAX 256
 

@@ -9,19 +9,17 @@
 #include <stdio.h>
 #include <string.h>
 
-static Obj *allocateObj(size_t size, ObjType type)
-{
-    Obj *obj = (Obj *) reallocate(NULL, 0, size);
+static Obj *allocateObj(size_t size, ObjType type) {
+    Obj *obj = (Obj *)reallocate(NULL, 0, size);
     obj->type = type;
     obj->next = vm.objects;
     vm.objects = obj;
     return obj;
 }
 
-#define ALLOCATE_OBJ(type, objType) (type *) allocateObj(sizeof(type), objType)
+#define ALLOCATE_OBJ(type, objType) (type *)allocateObj(sizeof(type), objType)
 
-static ObjString *allocateString(char *chars, int length, uint32_t hash)
-{
+static ObjString *allocateString(char *chars, int length, uint32_t hash) {
     ObjString *string = ALLOCATE_OBJ(ObjString, OBJ_STRING);
     string->length = length;
     string->chars = chars;
@@ -30,18 +28,16 @@ static ObjString *allocateString(char *chars, int length, uint32_t hash)
     return string;
 }
 
-static uint32_t hashString(const char *key, int length)
-{
+static uint32_t hashString(const char *key, int length) {
     uint32_t hash = 2166136261u;
     for (int i = 0; i < length; i++) {
-        hash ^= (uint8_t) key[i];
+        hash ^= (uint8_t)key[i];
         hash *= 16777619;
     }
     return hash;
 }
 
-ObjString *copyString(const char *chars, int length)
-{
+ObjString *copyString(const char *chars, int length) {
     uint32_t hash = hashString(chars, length);
     ObjString *interned = tableFindString(&vm.strings, chars, length, hash);
     if (interned != NULL) {
@@ -53,17 +49,15 @@ ObjString *copyString(const char *chars, int length)
     return allocateString(heap, length, hash);
 }
 
-void printObject(Value value)
-{
+void printObject(Value value) {
     switch (OBJ_TYPE(value)) {
-        case OBJ_STRING :
-            printf("%s", AS_CSTRING(value));
-            break;
+    case OBJ_STRING:
+        printf("%s", AS_CSTRING(value));
+        break;
     }
 }
 
-ObjString *takeString(char *chars, int length)
-{
+ObjString *takeString(char *chars, int length) {
     uint32_t hash = hashString(chars, length);
     ObjString *interned = tableFindString(&vm.strings, chars, length, hash);
     if (interned != NULL) {

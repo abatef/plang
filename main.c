@@ -4,8 +4,7 @@
 
 #include "vm.h"
 
-static void repl()
-{
+static void repl() {
     char line[1024];
     for (;;) {
         printf("> ");
@@ -18,8 +17,7 @@ static void repl()
     }
 }
 
-static char *readFile(const char *source)
-{
+static char *readFile(const char *source) {
     FILE *file = fopen(source, "rb");
 
     if (file == NULL) {
@@ -31,7 +29,7 @@ static char *readFile(const char *source)
     size_t fileSize = ftell(file);
     rewind(file);
 
-    char *buffer = (char *) malloc(fileSize + 1);
+    char *buffer = (char *)malloc(fileSize + 1);
 
     if (buffer == NULL) {
         fprintf(stderr, "Not enough memory to read \"%s\".\n", source);
@@ -51,18 +49,18 @@ static char *readFile(const char *source)
     return buffer;
 }
 
-static void runFile(const char *path)
-{
+static void runFile(const char *path) {
     char *source = readFile(path);
     InterpretResult result = interpret(source);
     free(source);
 
-    if (result == INTERPRET_COMPILE_ERROR) exit(65);
-    if (result == INTERPRET_RUNTIME_ERROR) exit(70);
+    if (result == INTERPRET_COMPILE_ERROR)
+        exit(65);
+    if (result == INTERPRET_RUNTIME_ERROR)
+        exit(70);
 }
 
-int main()
-{
+int main() {
     initVM();
     repl();
     freeVM();
