@@ -10,6 +10,7 @@
 #include <stdarg.h>
 #include <stdbool.h>
 #include <stddef.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -154,6 +155,16 @@ static InterpretResult run() {
                 runtimeError("Undefined variable '%s'.", name->chars);
                 return INTERPRET_RUNTIME_ERROR;
             }
+            break;
+        }
+        case OP_GET_LOCAL: {
+            uint8_t slot = READ_BYTE();
+            push(vm.stack[slot]);
+            break;
+        }
+        case OP_SET_LOCAL: {
+            uint8_t slot = READ_BYTE();
+            vm.stack[slot] = peek(0);
             break;
         }
         }
