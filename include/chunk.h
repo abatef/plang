@@ -5,7 +5,7 @@
 #include "value.h"
 
 typedef enum {
-    OP_RET,
+    OP_RETURN,
     OP_CONST,
     OP_CONST_LONG,
     OP_NEG,
@@ -29,7 +29,8 @@ typedef enum {
     OP_SET_LOCAL,
     OP_JUMP_IF_FALSE,
     OP_JUMP,
-    OP_LOOP
+    OP_LOOP,
+    OP_CALL
 } Opcode;
 
 typedef struct {
