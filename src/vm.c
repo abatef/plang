@@ -281,19 +281,22 @@ void initVM() {
     resetStack();
 }
 
-InterpretResult interpret(const char *source) {
-    ObjFunction *funtion = compile(source);
-    if (funtion == NULL) {
+InterpretResult interpret2(const char *source) {
+    ObjFunction *function = compile(source);
+    if (function == NULL) {
         return INTERPRET_COMPILE_ERROR;
     }
 
-    push(OBJ_VAL(funtion));
-    call(funtion, 0);
+    push(OBJ_VAL(function));
+    if (!call(function, 0)) {
+        return INTERPRET_RUNTIME_ERROR;
+    }
 
-    CallFrame *frame = &vm.frames[vm.frameCount++];
-    frame->function = funtion;
-    frame->ip = funtion->chunk.code;
+    CallFrame *frame = &vm.frames[vm.frameCount - 1];
+    frame->function = function;
+    frame->ip = function->chunk.code;
     frame->slots = vm.stack;
+
     return run();
 }
 
