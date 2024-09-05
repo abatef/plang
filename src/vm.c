@@ -281,7 +281,7 @@ void initVM() {
     resetStack();
 }
 
-InterpretResult interpret2(const char *source) {
+InterpretResult interpret(const char *source) {
     ObjFunction *function = compile(source);
     if (function == NULL) {
         return INTERPRET_COMPILE_ERROR;
