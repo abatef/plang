@@ -1,4 +1,4 @@
-# Bytecode Virtual Machine Implementation
+# Programming Language Interpreter
 
 An implementation of a **Bytecode Virtual Machine**
 The VM is a high-performance interpreter for a custom language, capable of executing bytecode instructions efficiently.
